@@ -31,7 +31,7 @@ impl HodgeStar {
         let n = self.manifold_dim;
         let star2 = Self::new(n, n - k);
         let double = star2.matrix() * &self.matrix;
-        let expected_sign = if (k * (n - k)) % 2 == 0 { 1.0 } else { -1.0 };
+        let expected_sign = if (k * (n - k)).is_multiple_of(2) { 1.0 } else { -1.0 };
         let dim = binomial(n, k);
         if dim == 0 { return true; }
         let identity = DMatrix::identity(dim, dim) * expected_sign;
@@ -57,7 +57,7 @@ fn compute_hodge_star_matrix(n: usize, k: usize) -> DMatrix<f64> {
     for (j, sigma) in basis_k.iter().enumerate() {
         let complement: Vec<usize> = (0..n).filter(|x| !sigma.contains(x)).collect();
         if let Some(i) = basis_nk.iter().position(|t| *t == complement) {
-            let mut perm: Vec<usize> = sigma.iter().cloned().collect();
+            let mut perm: Vec<usize> = sigma.to_vec();
             perm.extend(&complement);
             let sign = permutation_sign(&perm);
             data[i * cols + j] = sign as f64;

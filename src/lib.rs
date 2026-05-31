@@ -1,3 +1,4 @@
+#![deny(unsafe_code)]
 //! # Hodge Theory for Agent Knowledge Spaces
 
 use nalgebra::{DMatrix, DVector};
@@ -67,6 +68,7 @@ impl DifferentialForm {
     }
 
     pub fn len(&self) -> usize { self.coefficients.len() }
+    pub fn is_empty(&self) -> bool { self.coefficients.is_empty() }
     pub fn is_zero(&self) -> bool { self.coefficients.iter().all(|c| c.abs() < 1e-10) }
     pub fn norm(&self) -> f64 { self.coefficients.iter().map(|c| c * c).sum::<f64>().sqrt() }
 
@@ -182,7 +184,7 @@ impl CoDerivative {
         let d_nk = ExteriorDerivative::new(n, n - k);                   // d_{n-k}: Ω^{n-k} → Ω^{n-k+1}
         let star_nkp1 = HodgeStar::new(n, n - k + 1);                   // ⋆_{n-k+1}: Ω^{n-k+1} → Ω^{k-1}
 
-        let sign = if (n * (k + 1) + 1) % 2 == 0 { 1.0f64 } else { -1.0f64 };
+        let sign = if (n * (k + 1) + 1).is_multiple_of(2) { 1.0f64 } else { -1.0f64 };
         let matrix = (star_nkp1.matrix() * d_nk.matrix()) * star_k.matrix() * sign;
 
         Self { manifold_dim: n, from_degree: k, matrix }
