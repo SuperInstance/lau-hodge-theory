@@ -1,0 +1,15 @@
+[package]
+name = "lau-hodge-theory"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+repository = "https://github.com/SuperInstance/lau-hodge-theory"
+description = "Hodge theory for agent knowledge spaces — decomposition, harmonic forms, and spectral sequences"
+
+[dependencies]
+nalgebra = "0.33"
+serde = { version = "1", features = ["derive"] }
+num-traits = "0.2"
+
+[dev-dependencies]
+approx = "0.5"
