@@ -511,7 +511,7 @@ mod tests {
         let n = 2;
         for k in 0..=n {
             let dim = binomial(n, k);
-            let coeffs: Vec<f64> = (0..dim).map(|i| (i as f64 + 1.0)).collect();
+            let coeffs: Vec<f64> = (0..dim).map(|i| i as f64 + 1.0).collect();
             let form = DifferentialForm::new(n, k, coeffs);
 
             let decomp = hodge_decompose(&form);
@@ -527,7 +527,7 @@ mod tests {
         let n = 4;
         for k in 0..=n {
             let dim = binomial(n, k);
-            let coeffs: Vec<f64> = (0..dim).map(|i| (i as f64 * 0.3 + 0.5)).collect();
+            let coeffs: Vec<f64> = (0..dim).map(|i| i as f64 * 0.3 + 0.5).collect();
             let form = DifferentialForm::new(n, k, coeffs);
 
             let decomp = hodge_decompose(&form);
@@ -579,7 +579,7 @@ mod tests {
                 for trial in 0..5 {
                     let dim = binomial(n, k);
                     let coeffs: Vec<f64> = (0..dim)
-                        .map(|i| ((i + trial * 7) as f64 * 1.7 % 5.0 - 2.5))
+                        .map(|i| (i + trial * 7) as f64 * 1.7 % 5.0 - 2.5)
                         .collect();
                     let form = DifferentialForm::new(n, k, coeffs);
                     let decomp = hodge_decompose(&form);

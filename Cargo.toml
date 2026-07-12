@@ -5,6 +5,8 @@ edition = "2021"
 license = "MIT"
 repository = "https://github.com/SuperInstance/lau-hodge-theory"
 description = "Hodge theory for agent knowledge spaces — decomposition, harmonic forms, and spectral sequences"
+keywords = ["hodge-theory", "differential-forms", "cohomology", "linear-algebra", "knowledge"]
+categories = ["mathematics", "science"]
 
 [dependencies]
 nalgebra = "0.33"
